@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="800px" height="600px"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xhtml="http://www.w3.org/1999/xhtml"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:a="http://www.adobe.com/svg10-extensions" a:timeline="independent"
+     onload="top.load(evt)">
+     
+  <!--CSS Definition; source code original from GitHub-Alex Poon who distributed the open scource code -->
+  <style type="text/css">
+    .button {
+      fill: white;
+      fill-opacity: 0.5;
+      stroke: grey;
+      stroke-width: 5;
+    }
+
+    .button_text {
+      fill: black;
+      font-family: Arial;
+      font-size: 20px;
+      text-anchor: middle;
+    }
+ 
+    .info_text{
+      fill: #880000;
+      font-family: Arial;
+      font-size: 20px;
+      text-anchor: middle;		
+    }
+
+    .info {
+      fill: #000044;
+      fill-opacity: 0.5;
+      stroke: white;
+      stroke-width: 5;
+    }
+    
+    .instruction_text {
+	  fill: #DDDDDD;
+    font-weight:bold;
+	  font-size: 20px;
+	}
+	</style>
+
+  <defs>
+    <clipPath id="gameareaclip">
+      <rect x="20" y="20" width="600" height="560"/>
+    </clipPath>
+    <pattern id="background_pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" style="fill:yellow"/>
+      <ellipse cx="10" cy="10" rx="8" ry="4" style="fill:#CCCCCC"/>
+    </pattern>
+    <radialGradient id="player_color">
+      <stop offset="0.0" style="stop-color:yellow;stop-opacity:1"/>
+      <stop offset="0.8" style="stop-color:yellow;stop-opacity:1"/>
+      <stop offset="1.0" style="stop-color:orange;stop-opacity:1"/>
+    </radialGradient>
+    <g id="monster">
+      <path d="M0,30 q0,-30 20,-30 t20,30 l0,10 l-5,-7 l-5,7 l-5,-7 l-5,7 l-5,-7 l-5,7 l-5,-7 l-5,7 l0,-10"
+            style="fill:grey;fill-opacity:0.5;stroke:black;stroke-width:2"/>
+      <circle cx="14" cy="20" r="5" style="fill:yellow;stroke:black;stroke-width:2">
+        <animateColor attributeName="fill" values="yellow;red;yellow" dur="1s" repeatCount="indefinite" />
+        <animate attributeName="r" attributeType="XML" dur="2.3s" values="5; 9; 5" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="30" cy="20" r="5" style="fill:yellow;stroke:black;stroke-width:2">
+        <animateColor attributeName="fill" values="yellow;red;yellow" dur="1s" repeatCount="indefinite" />
+        <animate attributeName="r" attributeType="XML" dur="2.3s" values="9; 5; 9" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    <g id="special_monster">
+      <path d="M0,30 q0,-30 20,-30 t20,30 l0,10 l-5,-7 l-5,7 l-5,-7 l-5,7 l-5,-7 l-5,7 l-5,-7 l-5,7 l0,-10"
+            style="fill:yellow;fill-opacity:0.7;stroke:black;stroke-width:2"/>
+      <circle cx="12" cy="20" r="5" style="fill:#333333;stroke:black;stroke-width:2">
+        <animateColor attributeName="fill" values="black;yellow;black" dur="1s" repeatCount="indefinite" />
+        <animate attributeName="r" attributeType="XML" dur="0.6s" values="5; 9; 5" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="28" cy="20" r="5" style="fill:#333333;stroke:black;stroke-width:2">
+        <animateColor attributeName="fill" values="yellow;black;yellow" dur="1s" repeatCount="indefinite" />
+        <animate attributeName="r" attributeType="XML" dur="0.6s" values="9; 5; 9" repeatCount="indefinite"/>
+      </circle>
+      <text id="special_monster_value" x="20" y="0"
+        style="fill:red;font-size:16px;text-anchor:middle">Boss</text>
+    </g>
+    <g id="bullet">
+      <circle cx="5" cy="5" r="7" style="fill:black"/>
+      <circle cx="5" cy="5" r="3" style="fill:yellow"/>
+    </g>
+    <g id="name">
+	<text id="name_value" x="0" y="0"
+   style="fill:cadetblue;font-size:16px;text-anchor:middle">Anonymous</text>
+	</g>
+	<g id="exit">
+	  	<path
+		d="M22.5 28 C22.2239 28 22 28 22 28 C22 28.5523 22.2239 29 22.5 29 C23.3284 29 24 28.5523
+			24 28 C24 26.8954 23.3284 26 22.5 26 C20.8432 26 19.5 26.8954 19.5 28 C19.5
+			30.2091 20.8432 32 22.5 32 C25.2614 32 27.5 30.2091 27.5 28 C27.5 24.6863
+			25.2614 22 22.5 22 C18.3579 22 15 24.6863 15 28 C15 32.9705 18.3579 37 22.5
+			37 C28.2989 37 33 32.9705 33 28 C33 21.3726 28.2989 16 22.5 16"
+		transform="matrix(1 0 0 1 0 3.55271e-015)"
+		 style="fill:none;stroke:rgb(128,255,255);stroke-width:2"/>
+	<polygon
+		points="10.6077,32 13,33.0099 10.6077,33.9802 10.6077,33.0891 7.92823,33.0891 5.77512,34
+			3,34 5.39234,33.0099 3,32 5.77512,32 7.92823,32.8911 10.6077,32.8911"
+		 style="fill:rgb(128,255,255);stroke:rgb(0,255,255);stroke-width:1"/>
+	<polygon
+		points="38.6316,22 36,23.5149 38.6316,24.9703 38.6316,23.6337 41.5789,23.6337 43.9474,25
+			47,25 44.3684,23.5149 47,22 43.9474,22 41.5789,23.3366 38.6316,23.3366"
+		 style="fill:rgb(128,255,255);stroke:rgb(0,255,255);stroke-width:1"/>
+	<text x="11px" y="9px"
+		transform="translate(0 1) translate(0 1) translate(0 1) translate(0 1)"
+		 style="fill:rgb(0,255,255);font-size:15;font-family:@Malgun Gothic">EXIT</text>
+	</g>door
+	
+	<g id="portal">
+	<text x="9px" y="34px"
+		transform="translate(10.4283 23.043) scale(0.734482 1.0399) translate(-10.4283 -23.043) translate(-13.3125 -22.2244)"
+		
+		 style="fill:rgb(192,192,255);font-size:15;font-family:@Malgun Gothic">PORTAL</text>
+	<rect x="2" y="14" width="36" height="65"
+		 style="fill:rgb(255,255,0);stroke:rgb(128,255,255);stroke-width:1"/>
+	<ellipse cx="6.5" cy="44" rx="1.5" ry="2"
+		 style="fill:rgb(0,255,255);stroke:rgb(0,0,0);stroke-width:1"/>
+	</g>
+	
+	<g id="good_thing">
+	<g style="fill:rgb(0,0,0);stroke:rgb(255,255,0);stroke-width:1">
+		<polygon id="inside"
+			points="10.5,4 10.5,10.1505 12.6327,10.8602 16,8.25806 10.5,10.1505 10.5,12.3978 13.8673,15
+				10.5,10.1505 8.36735,10.8602 7.13265,14.8817 10.5,10.1505 9.15306,8.25806
+				5,8.25806 10.5,10.1505 11.7347,8.25806"/>
+		<polygon id="outside" style="fill:none"
+			points="10.5,4 11.7347,8.25806 16,8.25806 12.6327,10.8602 13.8673,15 10.5,12.3978 7.13265,14.8817
+				8.36735,10.8602 5,8.25806 9.15306,8.25806"/>
+		<g style="fill:rgb(0,0,0);stroke:rgb(64,64,64);stroke-width:1">
+			<polygon id="inside"
+				points="4.5,4 4.5,4.55914 4.69388,4.62366 5,4.3871 4.5,4.55914 4.5,4.76344 4.80612,5 4.5,4.55914
+					4.30612,4.62366 4.19388,4.98925 4.5,4.55914 4.37755,4.3871 4,4.3871
+					4.5,4.55914 4.61224,4.3871"/>
+			<polygon id="outside" style="fill:none"
+				points="4.5,4 4.61224,4.3871 5,4.3871 4.69388,4.62366 4.80612,5 4.5,4.76344 4.19388,4.98925
+					4.30612,4.62366 4,4.3871 4.37755,4.3871"/>
+			<g style="fill:rgb(0,0,0);stroke:rgb(64,64,64);stroke-width:1">
+				<polygon id="inside"
+					points="15.5,4 15.5,4.55914 15.6939,4.62366 16,4.3871 15.5,4.55914 15.5,4.76344 15.8061,5
+						15.5,4.55914 15.3061,4.62366 15.1939,4.98925 15.5,4.55914 15.3776,4.3871
+						15,4.3871 15.5,4.55914 15.6122,4.3871"/>
+				<polygon id="outside" style="fill:none"
+					points="15.5,4 15.6122,4.3871 16,4.3871 15.6939,4.62366 15.8061,5 15.5,4.76344 15.1939,4.98925
+						15.3061,4.62366 15,4.3871 15.3776,4.3871"/>
+				<g style="fill:rgb(0,0,0);stroke:rgb(64,64,64);stroke-width:1">
+					<polygon id="inside"
+						points="18.5,13 18.5,13.5591 18.6939,13.6237 19,13.3871 18.5,13.5591 18.5,13.7634 18.8061,14
+							18.5,13.5591 18.3061,13.6237 18.1939,13.9892 18.5,13.5591 18.3776,13.3871
+							18,13.3871 18.5,13.5591 18.6122,13.3871"/>
+					<polygon id="outside" style="fill:none"
+						points="18.5,13 18.6122,13.3871 19,13.3871 18.6939,13.6237 18.8061,14 18.5,13.7634 18.1939,13.9892
+							18.3061,13.6237 18,13.3871 18.3776,13.3871"/>
+					<g style="fill:rgb(0,0,0);stroke:rgb(64,64,64);stroke-width:1">
+						<polygon id="inside"
+							points="10.5,17 10.5,17.5591 10.6939,17.6237 11,17.3871 10.5,17.5591 10.5,17.7634 10.8061,18
+								10.5,17.5591 10.3061,17.6237 10.1939,17.9892 10.5,17.5591 10.3776,17.3871
+								10,17.3871 10.5,17.5591 10.6122,17.3871"/>
+						<polygon id="outside" style="fill:none"
+							points="10.5,17 10.6122,17.3871 11,17.3871 10.6939,17.6237 10.8061,18 10.5,17.7634 10.1939,17.9892
+								10.3061,17.6237 10,17.3871 10.3776,17.3871"/>
+						<g style="fill:rgb(0,0,0);stroke:rgb(64,64,64);stroke-width:1">
+							<polygon id="inside"
+								points="3.5,13 3.5,13.5591 3.69388,13.6237 4,13.3871 3.5,13.5591 3.5,13.7634 3.80612,14 3.5,13.5591
+									3.30612,13.6237 3.19388,13.9892 3.5,13.5591 3.37755,13.3871
+									3,13.3871 3.5,13.5591 3.61224,13.3871"/>
+							<polygon id="outside" style="fill:none"
+								points="3.5,13 3.61224,13.3871 4,13.3871 3.69388,13.6237 3.80612,14 3.5,13.7634 3.19388,13.9892
+									3.30612,13.6237 3,13.3871 3.37755,13.3871"/>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+	</g>
+  </defs>
+
+  <rect width="100%" height="100%" style="fill:url(#background_pattern);stroke:#000000;stroke-width:8" />
+
+  <rect x="20" y="20" width="600" height="560" style="fill:black;stroke:#CCCCCC;stroke-width:10" />
+  
+<g transform="translate(640, 120)">
+  <text x="70" y="0"
+   style="fill:black;font-size:25px;font-weight:bold;text-anchor:middle">
+    Score:
+  </text>
+  <rect x="0" y="10" width="140" height="35" style="fill:lightblue" />
+  <text id="score" x="70" y="36"
+   style="fill:black;font-size:25px;text-anchor:middle">0</text>
+   
+  <text x="70" y="80"
+   style="fill:black;font-size:25px;font-weight:bold;text-anchor:middle">
+    Level:
+  </text>
+  <rect x="0" y="90" width="140" height="35" style="fill:lightblue" />
+  <text id="level" x="70" y="116"
+   style="fill:black;font-size:25px;text-anchor:middle">0</text>
+   
+  <text x="70" y="160"
+   style="fill:black;font-size:25px;font-weight:bold;text-anchor:middle">
+    Bullet:
+  </text>
+  <rect x="0" y="170" width="140" height="35" style="fill:lightblue" />
+  <text id="bulletNum" x="70" y="196"
+   style="fill:red;font-size:25px;text-anchor:middle">0</text>
+   <text x="70" y="240"
+   style="fill:black;font-size:25px;font-weight:bold;text-anchor:middle">
+    Time:
+  </text>
+  <rect x="0" y="250" width="140" height="35" style="fill:lightblue" />
+  <rect id="time_remaining_bar" x="0" y="250" width="140" height="35" style="fill:#3366EE; fill-opacity: 0.7;" />
+  <text id="time_remaining" x="70" y="276"
+   style="fill:black;font-size:25px;text-anchor:middle">0s</text>
+</g>
+
+
+  <g style="clip-path:url(#gameareaclip)">
+    <g transform="translate(20,20)">
+      <g id="gamearea" transform="translate(0,0)" width="600" height="560">
+        <rect x="0" y="0" width="600" height="560" style="fill:black" />
+
+        <g id="platforms">
+            <!-- 60 -->
+            <rect style="fill:#5588EE" width="60" height="20" x="0" y="60"/>
+
+            <!-- 80 -->
+            <rect style="fill:#5588EE" width="20" height="20" x="40" y="80"/>
+
+            <!-- 100 -->
+            <rect style="fill:#5588EE" width="140" height="20" x="40" y="100"/>
+            <rect style="fill:#5588EE" width="120" height="20" x="260" y="100"/>
+
+            <!-- 120 -->
+
+            <!-- 140 -->
+            <rect style="fill:#5588EE" width="40" height="20" x="560" y="140"/>
+
+            <!-- 160 -->
+            <rect style="fill:#5588EE" width="60" height="20" x="540" y="160"/>
+
+            <!-- 180 -->
+            <rect style="fill:#5588EE" width="20" height="20" x="0" y="180"/>
+            <rect style="fill:#5588EE" width="80" height="20" x="520" y="180"/>
+
+            <!-- 200 -->
+            <rect style="fill:#5588EE" width="20" height="20" x="0" y="200"/>
+
+            <!-- 220 -->
+            <rect style="fill:#5588EE" width="80" height="20" x="0" y="220"/>
+
+            <!-- 240 -->
+            <rect style="fill:#5588EE" width="20" height="20" x="240" y="240"/>
+
+            <!-- 260 -->
+            <rect style="fill:#5588EE" width="60" height="20" x="220" y="260"/>
+
+            <!-- 280 -->
+            <rect style="fill:#5588EE" width="100" height="20" x="200" y="280"/>
+
+            <!-- 300 -->
+            <rect style="fill:#5588EE" width="100" height="20" x="120" y="300"/>
+            <rect style="fill:#5588EE" width="40" height="20" x="280" y="300"/>
+            <rect id="movingVerticalPlatform" style="fill:orange" width="40" height="20" x="440" y="300"/>
+
+            <!-- 320 -->
+            <rect style="fill:#5588EE" width="40" height="20" x="0" y="320"/>
+            <rect style="fill:#5588EE" width="60" height="20" x="280" y="320"/>
+            <rect style="fill:#5588EE" width="20" height="20" x="380" y="320"/>
+
+            <!-- 340 -->
+            <rect style="fill:#5588EE" width="60" height="20" x="0" y="340"/>
+            <rect style="fill:#5588EE" width="20" height="20" x="320" y="340"/>
+            <rect style="fill:#5588EE" width="60" height="20" x="380" y="340"/>
+
+            <!-- 360 -->
+            <rect style="fill:#5588EE" width="120" height="20" x="0" y="360"/>
+            <rect style="fill:#5588EE" width="20" height="20" x="320" y="360"/>
+            <rect style="fill:#5588EE" width="120" height="20" x="380" y="360"/>
+
+            <!-- 380 -->
+            <rect style="fill:#5588EE" width="100" height="20" x="0" y="380"/>
+            <rect style="fill:#5588EE" width="20" height="20" x="220" y="380"/>
+            <rect style="fill:#5588EE" width="20" height="20" x="580" y="380"/>
+
+            <!-- 400 -->
+            <rect style="fill:#5588EE" width="80" height="20" x="180" y="400"/>
+            <rect style="fill:#5588EE" width="40" height="20" x="560" y="400"/>
+
+            <!-- 420 -->
+            <rect style="fill:#5588EE" width="120" height="20" x="160" y="420"/>
+            <rect style="fill:#5588EE" width="60" height="20" x="540" y="420"/>
+
+            <!-- 440 -->
+            <rect style="fill:#5588EE" width="100" height="20" x="140" y="440"/>
+            <rect style="fill:#5588EE" width="20" height="20" x="440" y="440"/>
+            <rect style="fill:#5588EE" width="60" height="20" x="500" y="440"/>
+
+            <!-- 460 -->
+            <rect style="fill:#5588EE" width="60" height="20" x="120" y="460"/>
+            <rect style="fill:#5588EE" width="60" height="20" x="400" y="460"/>
+
+            <!-- 480 -->
+            <rect style="fill:#5588EE" width="40" height="20" x="0" y="480"/>
+            <rect style="fill:#5588EE" width="60" height="20" x="380" y="480"/>
+
+            <!-- 500 -->
+            <rect style="fill:#5588EE" width="60" height="20" x="0" y="500"/>
+            <rect style="fill:#5588EE" width="20" height="20" x="260" y="500"/>
+
+            <!-- 520 -->
+            <rect style="fill:#5588EE" width="80" height="20" x="0" y="520"/>
+            <rect style="fill:#5588EE" width="20" height="20" x="140" y="520"/>
+            <rect style="fill:#5588EE" width="80" height="20" x="240" y="520"/>
+            <rect style="fill:#5588EE" width="20" height="20" x="500" y="520"/>
+
+            <!-- the floor -->
+            <rect style="fill:#AAAAAA" width="600" height="20" x="0" y="540"/>
+        </g>
+	    	<g id="exit_door" />
+	    	<g>
+        	<use id="portal1" xlink:href="#portal" x="40" y="140" />
+        </g>
+        <g>
+        	<use id="portal2" xlink:href="#portal" x="300" y="20" />
+        </g>
+        <g id="monsters"/>
+        <g id="bullets"/>
+		<g id="player_name" />
+		<g id="good_things" />
+		
+    <g id="player">
+	<path d="" style="fill:rgb(255,255,0);stroke:rgb(255,64,64);stroke-width:1"/>
+	<path d="M5.94444 19.2778 C16.4517 17.1763 29.3961 -1.24169 33.5 19.2778"
+		 style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<line x1="6" y1="19" x2="34" y2="19"
+		transform="translate(0 -1) translate(0 1) translate(0 1) translate(0 -1)"
+		 style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<ellipse cx="28.5" cy="15" rx="1.5" ry="1"
+		 style="fill:rgb(255,255,128);stroke:rgb(0,0,0);stroke-width:1"/>
+	<line x1="16" y1="19" x2="16" y2="29"
+		 style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<line x1="16" y1="29" x2="13" y2="30"
+		 style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<line x1="16" y1="29" x2="18" y2="30"
+		 style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<line x1="20" y1="15" x2="20" y2="25"
+		transform="translate(0 1) translate(0 1) translate(0 1) translate(0 1) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(-1 0) translate(-1 0) translate(-1 0) translate(-1 0) translate(-1 0) translate(-1 0) translate(-1 0)"
+		
+		 style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<line x1="19" y1="20" x2="21" y2="21"
+		transform="translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(1 0) translate(0 1) translate(0 1) translate(0 1) translate(0 1) translate(0 1) translate(0 1) translate(0 1) translate(0 1) translate(0 1) translate(0 1) translate(0 1) translate(-1 0) translate(-1 0) translate(-1 0) translate(0 -1) translate(0 -1) translate(-1 0)"
+		
+		 style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<line x1="26" y1="28" x2="23" y2="30" transform="translate(0 1)"
+		 style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<line x1="27" y1="9" x2="27" y2="6" style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<line x1="27" y1="6" x2="24" y2="5" style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+	<line x1="27" y1="6" x2="29" y2="5" style="fill:none;stroke:rgb(255,255,255);stroke-width:1"/>
+  </g>
+	<g id="highscoretable" transform="translate(40,40)" style="visibility:hidden">
+	  <rect width="520" height="480"
+	   style="fill:grey;stroke:red;stroke-width:2"/>
+	  <text x="160" y="40"
+	   style="fill:blue;font-size:30px;font-weight:bold;text-anchor:middle">
+	    High Score Table
+	  </text>
+	  <text id="highscoretext" y="35"
+	   style="font-size: 20px;font-weight:bold"/>
+	  <g onclick="top.restart(false)">
+        <rect onmouseover="this.style.fill = 'yellow'" onmouseout="this.style.fill = 'white'" class="button" x="150" y="400" width="200" height="50" rx="10" ry="10"  />
+        <text onmouseover="this.style.fill = 'red'" onmouseout="this.style.fill = 'black'" class="button_text" x="250" y="430">Start again?</text>
+      </g>
+	</g>
+      </g>
+    <g id="mainPage" transform="translate(0,0)" width="600" height="560">
+      <rect x="0" y="0" width="600" height="560" style="fill:black" />
+      <text id="titleText" x="300" y="100" style="font-family: Arial; font-size: 40px;font-weight:bold; fill: white; text-anchor: middle">Stars Hunting Game</text>
+      <text class="instruction_text" x="50" y="150">You are a star hunter. You need to collect</text>
+      <text class="instruction_text" x="50" y="175"> as many stars as you can before go to exit.</text>
+      <text class="instruction_text" x="50" y="200">In zoom mode, you will get more score compared</text>
+      <text class="instruction_text" x="50" y="225"> to normal mode; monsters will distract you.</text>
+      <text class="instruction_text" x="50" y="250">Keys for you to survive and win:</text>
+      <text class="instruction_text" x="50" y="275">W: Up</text>
+      <text class="instruction_text" x="50" y="300">A: Left</text>
+      <text class="instruction_text" x="50" y="325">D: Right</text>
+      <text class="instruction_text" x="50" y="350">Space: Shoot bullet</text>
+      <text class="instruction_text" x="50" y="375">C: Cheat Mode "ON"</text>
+      <text class="instruction_text" x="50" y="400">V: Cheat Mode "OFF"</text>
+      
+      <text id="authorInfoText" x="100" y="550" style="font-family: 'Century Gothic'; font-size: 20px; fill: white; text-anchor: middle">WONG Kin Fat (1784)</text>
+      <g onclick="top.initializeGame(false)">
+        <rect onmouseover="this.style.fill = 'yellow'" onmouseout="this.style.fill = 'white'" class="button" x="50" y="450" width="200" height="50" rx="10" ry="10" />
+        <text onmouseover="this.style.fill = 'red'" onmouseout="this.style.fill = 'black'" class="button_text" id="normalModeText" x="150" y="480">Normal Mode</text>
+      </g>
+      <g onclick="top.initializeGame(true)" onmouseover="this.style.fill = 'yellow'" onmouseout="this.style.fill = 'white'">
+        <rect onmouseover="this.style.fill = 'yellow'" onmouseout="this.style.fill = 'white'" class="button" x="350" y="450" width="200" height="50" rx="10" ry="10" />
+        <text onmouseover="this.style.fill = 'red'" onmouseout="this.style.fill = 'black'" class="button_text" id="normalModeText" x="450" y="480">Zoom Mode</text>
+      </g>
+    </g>
+    </g>
+  </g>
+</svg>
